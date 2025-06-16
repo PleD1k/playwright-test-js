@@ -8,19 +8,10 @@ services:
     image: playwright-test-ui
     working_dir: /app
     volumes:
-<<<<<<< HEAD
       - .:/app
-=======
-      - .:/app 
-    command: npx playwright test
->>>>>>> 857d10ba88e15c1ba7a05b5e94a4c8db26d9860a
     environment:
       - BASE_URL
       - USER_NAME
       - BASE_DIR
     env_file:
-<<<<<<< HEAD
       - .env
-=======
-      - .env
->>>>>>> 857d10ba88e15c1ba7a05b5e94a4c8db26d9860a
