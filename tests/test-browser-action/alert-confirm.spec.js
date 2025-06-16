@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('Task7', () => {
-  test('Check drag and drop', async ({ page }) => {
+  test('Check alert close', async ({ page }) => {
     await page.goto('https://the-internet.herokuapp.com/javascript_alerts');
     
     page.once('dialog', async dialog => {
