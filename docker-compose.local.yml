@@ -9,5 +9,10 @@ services:
     working_dir: /app
     volumes:
       - .:/app 
-      - ./tests/.env:/app/.env
     command: npx playwright test
+    environment:
+      - BASE_URL
+      - USER_NAME
+      - BASE_DIR
+    env_file:
+      - .env
