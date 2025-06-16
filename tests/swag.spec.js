@@ -2,13 +2,13 @@ import {test, expect} from "@playwright/test"
 import dotenv from 'dotenv'
 dotenv.config()
 
-test.describe.skip('UI Tests for Saucedemo', () => {
-test.beforeEach(async ({ page }) => {
-     await page.goto('');
-     await page.fill('#user-name', process.env.USERNAMETEST || '');
-     await page.fill('#password', process.env.PASSWORD || '');
-     await page.click('#login-button');
-});
+test.describe('UI Tests for Saucedemo', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('');
+    await page.fill('#user-name', process.env.USERNAMETEST || '');
+    await page.fill('#password', process.env.PASSWORD || '');
+    await page.click('#login-button');
+  });
 
   test.skip('Test 1: should verify page title after login', async ({ page }) => {
 
@@ -16,9 +16,12 @@ test.beforeEach(async ({ page }) => {
     await expect(page).toHaveTitle(/Swag Labs/);
 });
 
-  test.skip('Test 2: should add product to cart and verify cart badge', async ({ page }) => {
-      await page.click('.inventory_item:first-child .btn_inventory');
 
+    test('Test 2: should add product to cart and verify cart badge', async ({ page }) => {
+
+      await page.click('.inventory_item:first-child .btn_inventory');
+      
+      await expect(page).toHaveURL(/inventory.html/);
       await expect(page.locator('.fa-layers-counter.shopping_cart_badge')).toHaveText('1');
 });
 
@@ -107,6 +110,7 @@ test.describe('Sauce Demo Report Tests', () => {
     await page.fill('#user-name', process.env.USERNAMETEST);
     await page.fill('#password', process.env.PASSWORD);
     await page.click('#login-button');
+
 
     await expect(page).toHaveURL(/inventory\.html/); // Проверяем URL
     await expect(page).toHaveScreenshot('inventory-page.png'); // Проверка скриншота страницы инвентаря
