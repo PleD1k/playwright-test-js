@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: playwright-test-ui
+    working_dir: /app
+    volumes:
+      - .:/app 
+      - ./tests/.env:/app/.env
+    command: npx playwright test
