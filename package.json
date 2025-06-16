@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/PleD1k/playwright-test-js#readme",
   "devDependencies": {
-    "@playwright/test": "^1.52.0",
+    "@playwright/test": "^1.53.0",
     "@types/node": "^22.15.30",
     "dotenv": "^16.5.0"
   }

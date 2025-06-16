@@ -28,6 +28,13 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://www.saucedemo.com/v1/index.html',
+    screenshot: 'on', // Делаем скриншот только при провале теста
+    expect: {
+    toHaveScreenshot: {
+      maxDiffPixels: 100, // Допустимые различия
+      threshold: 0.1, // Порог для сравнения
+    },
+  },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
