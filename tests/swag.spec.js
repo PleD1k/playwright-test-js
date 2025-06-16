@@ -8,8 +8,6 @@ test.describe('UI Tests for Saucedemo', () => {
     await page.fill('#user-name', process.env.USERNAMETEST || '');
     await page.fill('#password', process.env.PASSWORD || '');
     await page.click('#login-button');
-
-    await expect(page).toHaveURL(/inventory\.html/);
   });
 
   test('Test 1: should verify page title after login', async ({ page }) => {
@@ -17,9 +15,10 @@ test.describe('UI Tests for Saucedemo', () => {
     await expect(page).toHaveTitle(/Swag Labs/);
   });
 
-    test('Test 2: should dd product to cart and verify cart badge', async ({ page }) => {
+    test('Test 2: should add product to cart and verify cart badge', async ({ page }) => {
       await page.click('.inventory_item:first-child .btn_inventory');
-
+      
+      await expect(page).toHaveURL(/inventory.html/);
       await expect(page.locator('.fa-layers-counter.shopping_cart_badge')).toHaveText('1');
   });
 
