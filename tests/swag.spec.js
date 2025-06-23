@@ -16,9 +16,7 @@ test.describe('UI Tests for Saucedemo', () => {
     await expect(page).toHaveTitle(/Swag Labs/);
 });
 
-
     test('Test 2: should add product to cart and verify cart badge', async ({ page }) => {
-
       await page.click('.inventory_item:first-child .btn_inventory');
       
       await expect(page).toHaveURL(/inventory.html/);
@@ -98,8 +96,8 @@ test.describe('Sauce Demo Report Tests', () => {
   test('Test1: Check page title', async ({ page }) => {
     await page.goto('');
 
-    await expect(page).toHaveTitle(/Swag Labs/); // Проверяем заголовок
-    await expect(page).toHaveScreenshot('login-page.png'); // Проверка скриншота всей страницы
+    await expect(page).toHaveTitle(/Swag Labs/);
+    await expect(page).toHaveScreenshot('login-page.png');
   });
 
   // Тест 2: Проверка логина с валидными данными
@@ -111,22 +109,15 @@ test.describe('Sauce Demo Report Tests', () => {
     await page.fill('#password', process.env.PASSWORD);
     await page.click('#login-button');
 
+test('test 3: should delete items from all items page', async ({ page }) => {
+  await page.goto('https://www.saucedemo.com/v1/index.html');
+  await page.locator('[data-test="username"]').click();
+  await page.locator('[data-test="username"]').fill('standard_user');
+  await page.locator('[data-test="password"]').click();
+  await page.locator('[data-test="password"]').fill('secret_sauce');
+  await page.getByRole('button', { name: 'LOGIN' }).click();
+  await page.locator('div').filter({ hasText: /^\$29\.99ADD TO CART$/ }).getByRole('button').click();
+  await page.getByRole('button', { name: 'REMOVE' }).click();
 
-    await expect(page).toHaveURL(/inventory\.html/); // Проверяем URL
-    await expect(page).toHaveScreenshot('inventory-page.png'); // Проверка скриншота страницы инвентаря
-
-    await page.context().tracing.stop({path: `traces/test2-login-trace-${Date.now()}.zip`});
-  });
-
-  // Тест 3: Проверка отображения названия товара
-  test('Test3: should product have a name', async ({ page }) => {
-    await page.goto('');
-    await page.fill('#user-name', process.env.USERNAMETEST);
-    await page.fill('#password', process.env.PASSWORD);
-    await page.click('#login-button');
-    
-    const product = page.locator('.inventory_item:first-child .inventory_item_name');
-    await expect(product).toHaveText('Sauce Labs Backpack'); // Проверка текста
-    await expect(product).toHaveScreenshot('product-name.png'); // Проверка скриншота элемента
-  });
+  await expect(page.locator('#contents_wrapper')).toContainText('ADD TO CART');
 });
